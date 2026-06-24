@@ -1,4 +1,5 @@
 pipeline {
+
     agent any
 
     stages {
@@ -9,23 +10,17 @@ pipeline {
             }
         }
 
-        stage('Build Backend') {
+        stage('Install') {
             steps {
-                sh 'mvn clean package'
+                sh 'npm install'
             }
         }
 
-        stage('Build Frontend') {
+        stage('Build') {
             steps {
-                sh 'cd demoppfe && npm install'
-                sh 'cd demoppfe && ng build'
+                sh 'npm run build'
             }
         }
 
-        stage('Unit Tests') {
-            steps {
-                sh 'mvn test'
-            }
-        }
     }
 }
